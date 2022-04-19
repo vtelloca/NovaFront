@@ -1,0 +1,43 @@
+.example-button-row button,
+.example-button-row a{
+  margin-top: 20px;
+  color: #EEE;
+  background-color: #1abc9c;
+}
+
+.example-button-row button:hover,
+.example-button-row a:hover{
+  background-color: #EEE;
+  color: #1abc9c;
+}
+
+.example-button-row button{
+  position:absolute;
+  right:25%;
+}
+.example-button-row a{
+  position:absolute;
+  left:25%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.taskdetail {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  display: grid;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.mat-form-field{
+  height: 100%;
+  width: 70%;
+
+}
+

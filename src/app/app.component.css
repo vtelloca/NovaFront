@@ -1,0 +1,33 @@
+/*
+
+  background-color: #1abc9c;
+  background-color: #749cd1;
+
+  #34495e;
+
+*/
+.headerTitle{
+  background-color: #34495e;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  z-index: 0;
+  transition: all .5s ease 0s;
+  border-radius: 8px;
+  color: #1abc9c;
+  margin-top: 2%;
+}
+
+.headerTitle:hover{
+  background-color: #1abc9c;
+  color:  #34495e;
+}
+
+h1 {
+  text-align: center;
+  margin: 40px 0 40px;
+  text-align: center;
+  font-size: 30px;
+  font-family: Tahoma, Geneva, sans-serif;
+  text-transform: uppercase;
+}

@@ -1,0 +1,47 @@
+<head>
+
+</head>
+<body>
+<div>
+  <app-my-tasks-detail [myTask]="selectedTask"></app-my-tasks-detail>
+</div>
+
+<div class="alltabs" >
+  <div class="newTab target" (drop)="drop($event)" (dragover)="allowDrop($event)" >
+    <P id="headerTab">New</P>
+      <div *ngFor="let newmyTask of filterTask(0, myTasks);  let inew = index" class="viewTask">
+        <a id = "{{newmyTask.id}}"  routerLink="/detail/{{newmyTask.id}}"draggable="true" (dragstart)="drag($event)" class="tasklist">
+          <div class="id">{{newmyTask.id}}</div>
+          <div class="description">{{newmyTask.description}}</div>
+          <div class="state">{{getState(newmyTask.state)}} </div>
+        </a>
+      </div>
+  </div>
+
+  <div  class="inProgressTab target" (drop)="drop($event)" (dragover)="allowDrop($event)">
+    <P id="headerTab">In progress</P>
+      <div *ngFor="let ipmyTask of filterTask(1, myTasks);  let ip = index">
+        <a id = "{{ipmyTask.id}}"  routerLink="/detail/{{ipmyTask.id}}"draggable="true" (dragstart)="drag($event)" class="tasklist">
+          <div class="id">{{ipmyTask.id}}</div>
+          <div class="description">{{ipmyTask.description}}</div>
+          <div class="state">{{getState(ipmyTask.state)}} </div>
+          </a>
+      </div>
+  </div>
+
+  <div  class="completedTab target" (drop)="drop($event)" (dragover)="allowDrop($event)">
+    <P id="headerTab">Completed</P>
+      <div *ngFor="let completedMyTask of filterTask(2, myTasks);  let ic = index">
+        <a id = "{{completedMyTask.id}}" routerLink="/detail/{{completedMyTask.id}}"draggable="true" (dragstart)="drag($event)" class="tasklist">
+          <div class="id">{{completedMyTask.id}}</div>
+          <div class="description">{{completedMyTask.description}}</div>
+          <div class="state">{{getState(completedMyTask.state)}} </div>
+        </a>
+      </div>
+  </div>
+</div>
+
+<button mat-mini-fab color="primary" class="addTask"><mat-icon>add</mat-icon>
+</button>
+
+</body>

@@ -1,0 +1,66 @@
+<!--
+  <div *ngIf="myTask"  id="taskdetail">
+    <div id="form">
+        <h2>TASK {{myTask.id}} </h2>
+      <div class="col1">
+        <label for="myTask-id">Task Id: </label>
+        {{myTask.id}}
+      </div>
+
+      <div class="col1">
+        <label for="myTask-desciption">Task description: </label>
+        <input type="text" id="myTask-desciption" [(ngModel)]="myTask.description" placeholder="description">
+      </div>
+
+      <div class="col1">
+        <label for="myTask-state">Task state: </label>
+        <select (change)="selectState($event, myTask)" id="myTask-state" [(ngModel)]="myTask.state" placeholder="state">
+          <option value=0>New</option>
+          <option value=1>In Progress</option>
+          <option value=2>Completed</option>
+        </select>
+      </div>
+      <div class="example-button-row">
+        <a mat-raised-button color="" routerLink="/tasks">
+          Submit
+        </a>
+      </div>
+    </div>
+  </div>
+-->
+<div *ngIf="myTask"  class="taskdetail">
+
+  <div class="idDetails">
+    <h2>TASK {{myTask.id}} </h2>
+  </div>
+ <!-- <mat-form-field appearance="fill">
+    <mat-label>Task Id</mat-label>
+    <input matInput value="{{myTask.id}}">
+  </mat-form-field>
+-->
+  <div class="descriptionDetails">
+    <mat-form-field appearance="fill">
+      <mat-label>Task Description</mat-label>
+      <textarea matInput value="{{myTask.description}}"  [(ngModel)]="myTask.description"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="stateDetails">
+  <mat-form-field appearance="fill">
+    <mat-label>Task State</mat-label>
+    <mat-select [(ngModel)]="myTask.state">
+      <mat-option *ngFor="let state of statusId" [value]="state.value">
+        {{state.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  <div class="example-button-row">
+    <a mat-raised-button color="" routerLink="/tasks">
+      Submit
+    </a>
+    <button mat-mini-fab color="primary" (click)="delete(myTask)"><mat-icon>delete_forever</mat-icon>
+    </button>
+  </div>
+</div>
+
+
