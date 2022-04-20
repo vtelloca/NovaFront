@@ -7,27 +7,28 @@
 
 */
 .headerTitle{
-  background-color: #34495e;
+  background-color: #749cd1;
   margin: auto;
   width: 70%;
   padding: 10px;
   z-index: 0;
   transition: all .5s ease 0s;
   border-radius: 8px;
-  color: #1abc9c;
+  color: #eee;
   margin-top: 2%;
 }
 
 .headerTitle:hover{
-  background-color: #1abc9c;
-  color:  #34495e;
+  background-color: rgb(71, 97, 131);
+  color: #eee;
+  cursor: pointer;
 }
 
 h1 {
   text-align: center;
   margin: 40px 0 40px;
   text-align: center;
-  font-size: 30px;
+  font-size: 45px;
   font-family: Tahoma, Geneva, sans-serif;
   text-transform: uppercase;
 }

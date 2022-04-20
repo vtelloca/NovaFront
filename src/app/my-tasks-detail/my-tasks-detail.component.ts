@@ -2,8 +2,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 import {Task} from '../task'
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
-import { MyTaskService } from '../my-task.service';
+import { DefaultService } from '../service/api/default.service';
 
 
 @Component({
@@ -23,7 +22,7 @@ export class MyTasksDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private MyTaskService: MyTaskService,
+    private MyTaskService: DefaultService,
     private location: Location
   ) {}
 
@@ -31,17 +30,29 @@ export class MyTasksDetailComponent implements OnInit {
     this.getTasks();
   }
 
+
   getTasks(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.MyTaskService.getTask(id)
+    const id = Number(this.route.snapshot.paramMap.get('_id'));
+    this.MyTaskService.getByID(id)
       .subscribe(myTask => this.myTask = myTask);
   }
 
-  selectState(event: any, task : any) {
-    task.state = event.target.value;
+  updateTask(task : any){
+    this.MyTaskService.updateTask(task)
+      .subscribe(myTask => this.myTask = myTask);
   }
 
-  delete(task : any){
+  selectstatus(event: any, task : any) {
+    task.status = event.target.value;
+  }
 
+  deleteTask(){
+    const id = Number(this.route.snapshot.paramMap.get('_id'));
+    this.MyTaskService.deleteByID(id)
+      .subscribe(myTask => this.myTask = myTask);
+  }
+
+  reload(){
+    window.location.href ="/tasks";
   }
 }

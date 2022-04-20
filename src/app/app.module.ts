@@ -14,15 +14,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
-
-
-
+import { DefaultService } from './service/api/default.service';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { DialogContentExampleDialog } from './my-tasks/my-tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyTasksComponent,
-    MyTasksDetailComponent,
+    MyTasksDetailComponent,DialogContentExampleDialog
     ],
   imports: [
     BrowserModule,
@@ -32,9 +33,9 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,MatSelectModule,MatGridListModule, MatIconModule
+    MatInputModule,MatSelectModule,MatGridListModule, MatIconModule, MatDialogModule, MatTooltipModule
   ],
-  providers: [],
+  providers: [DefaultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

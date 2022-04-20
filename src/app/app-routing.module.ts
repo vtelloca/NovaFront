@@ -6,9 +6,9 @@ import { MyTasksDetailComponent  } from './my-tasks-detail/my-tasks-detail.compo
 
 
 const routes: Routes = [
-  { path: 'tasks', component: MyTasksComponent },
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
-  { path: 'detail/:id', component: MyTasksDetailComponent },
+  { path: 'tasks', component: MyTasksComponent },
+  { path: 'detail/:_id', component: MyTasksDetailComponent },
 ];
 
 

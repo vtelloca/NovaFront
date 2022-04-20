@@ -29,10 +29,27 @@
 .taskdetail {
   margin: auto;
   width: 70%;
-  padding: 10px;
   display: grid;
   text-align: center;
   margin-top: 5%;
+}
+.idDetails{
+  font-family: Tahoma, Geneva, sans-serif;
+  color: #34495e;
+  margin: auto;
+  width: 70%;
+  padding-top: 20px;
+  border-radius: 20px 20px 0 0;
+ /* background-color: #1abc9c;*/
+  background-color: rgb(165, 213, 216);
+  margin-bottom: 3%;
+
+}
+.descriptionDetails{
+  margin-bottom: 3%;
+}
+.stateDetails{
+  margin-bottom: 3%;
 }
 
 .mat-form-field{

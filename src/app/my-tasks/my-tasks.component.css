@@ -61,8 +61,7 @@ a:active {
 
 #headerTab{
   text-align: center;
-  color: #34495e;
-  font-family: Tahoma, Geneva, sans-serif;
+  color: #34495e;font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;
   font-weight: 700;
   text-decoration: none solid rgb(68, 68, 68);
@@ -70,7 +69,8 @@ a:active {
   font-variant: normal;
   text-transform: uppercase;
   width: 100%;
-
+  margin-bottom: 5%;
+  margin-top: 2%;
 }
 
 .tasklist {
@@ -88,6 +88,13 @@ a:active {
   cursor: grabbing;
   cursor: -webkit-grab;
   cursor: -moz-grab;
+
+}
+
+.tasklist:hover{
+  -webkit-box-shadow: 5px 2px 33px -8px rgba(0,0,0,0.87);
+  box-shadow: 5px 2px 33px -8px rgba(0,0,0,0.87);
+  color: black;
 }
 
 .id {
@@ -95,13 +102,14 @@ a:active {
   max-width: 30px;
   font-size: small;
   color: white;
-  padding: 0.8em 0.8em 0 0.8em;
+  padding: 0.8em 0.8em 0.8em 0.8em;
   background-color: #749cd1;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
   font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
   grid-area: 1 / 1 / 3 / 2;
+
 }
 
 .description {
@@ -113,7 +121,7 @@ a:active {
   grid-area: 1 / 2 / 2 / 4;
 }
 
-.state{
+.status{
   align-self:center;
   font-family: Tahoma, Geneva, sans-serif;
   grid-area: 2 / 2 / 3 / 4;
@@ -122,17 +130,70 @@ a:active {
   right:10px;
 }
 
-
 .addTask{
   position:absolute;
   bottom:30px;
-  left:15%;
+  left:12%;
   color: #EEE;
   background-color: #1abc9c;
+  width: 50px;
+  height: 50px;
 }
-
 
 .addTask:hover{
   background-color: #EEE;
   color: #1abc9c;
+}
+
+.deleteAll{
+  position:absolute;
+  bottom:30px;
+  right:12%;
+  color: #EEE;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}
+
+.deleteAll:hover{
+  background-color: #EEE;
+  color: red;
+}
+
+.createTask{
+  width: 450px;
+  height: 300px;
+}
+.createTitle{
+  text-align: center;
+}
+
+.mat-form-field{
+  width: 100%;
+  height: 100%;
+}
+
+.example-button-row button,
+.example-button-row a{
+  color: #EEE;
+  background-color: #1abc9c;
+}
+
+.example-button-row button:hover,
+.example-button-row a:hover{
+  background-color: #EEE;
+  color: #1abc9c;
+}
+
+.deleteTab{
+  color: #EEE;
+  background-color: red;
+  position:absolute;
+  bottom:30px;
+  right:12%;
+  text-align: center;
+  padding: 10px 0;
+  width: 50px;
+  height: max-content;
+  border-radius: 4px 4px 4px 4px;
 }

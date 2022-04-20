@@ -8,7 +8,9 @@ import { Observable, of } from 'rxjs';
 })
 export class MyTaskService {
 
-  constructor() { }
+  constructor() {
+
+   }
 
   getTasks(): Observable<Task[]> {
     const tasks = of(TASKS);
@@ -18,7 +20,7 @@ export class MyTaskService {
   getTask(id: number): Observable<Task> {
     // For now, assume that a hero with the specified `id` always exists.
     // Error handling will be added in the next step of the tutorial.
-    const hero = TASKS.find(h => h.id === id)!;
+    const hero = TASKS.find(h => h._id === id)!;
     return of(hero);
   }
 }

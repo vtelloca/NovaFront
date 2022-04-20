@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Task} from '../task'
-//import { TASKS } from '../mock-tasks';
-import { MyTaskService } from '../my-task.service';
 import { TASKS } from '../mock-tasks';
+import { DefaultService } from '../service/api/default.service';
+import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-my-tasks',
@@ -13,25 +14,23 @@ import { TASKS } from '../mock-tasks';
 export class MyTasksComponent implements OnInit {
   myTasks: Task[] = [];
   selectedTask ?: Task;
+  constructor(private MyTaskService: DefaultService, public dialog: MatDialog,  private location: Location) {}
 
-  newTasks: Array<Task> = [];
-  completedTasks: Array<Task> = [];
-  inProgressTasks: Array<Task> = [];
-
-//  constructor() { }
-
-  constructor(private MyTaskService: MyTaskService) {}
-
-  getTasks(): void {
-    this.MyTaskService.getTasks().subscribe(myTasks => this.myTasks = myTasks);;
-  }
+  delete : boolean = true
 
   ngOnInit(): void {
-    this.getTasks();
-   // this.initTask();
+    this.getAllTasks();
   }
 
-  getState(number :any) {
+  getAllTasks(): void {
+    this.MyTaskService.getAllTASK()
+      .subscribe((data) => {
+
+        this.myTasks = data;
+      });
+  }
+
+  getstatus(number :any) {
     if(number == 0){
      return "New";
     }
@@ -45,24 +44,7 @@ export class MyTasksComponent implements OnInit {
       return "Error";
     }
 }
-  initTask(){
-    for (let task of this.myTasks) {
-      if(task.state == 0){
-        this.newTasks?.push(task);
-      }
-      else if(task.state == 1){
-        this.inProgressTasks?.push(task);
-      }
-      else if(task.state == 2){
-        this.completedTasks?.push(task);
-      }
-    }
-  }
 
-  /*onSelect(task: Task): void {
-    this.selectedTask = task;
-  }
-*/
   allowDrop(e :any) : void {
       if(e.target.classList.contains("target"))
         e.preventDefault();
@@ -70,29 +52,98 @@ export class MyTasksComponent implements OnInit {
 
   drag(e :any) : void {
       e.dataTransfer.setData('text', e.target.id);
-   //   console.log(e.target.id);
+      this.delete = false;
+  }
+  updateTask(task : any){
+    this.MyTaskService.updateTask(task)
+      .subscribe(myTask => task = myTask);
+  }
+  deleteAllTasks(){
+    this.MyTaskService.deleteALL()
+    .subscribe((data) => {
+
+      this.myTasks = data;
+    });
+    this.myTasks = [];
   }
 
   drop(e :any): void  {
-    e.preventDefault();
+     e.preventDefault();
     const data = e.dataTransfer.getData('text');
-    //e.target.appendChild(document.getElementById(data));
     if(e.target.classList.contains("newTab")){
-      let tc = this.myTasks.findIndex( task => task.id == data );
-      this.myTasks[tc].state = 0;
+      let tc = this.myTasks.findIndex( task => task._id == data );
+      this.myTasks[tc]._state = 0;
+     this.updateTask(this.myTasks[tc]);
 
     }else if( e.target.classList.contains("inProgressTab")){
-      let tc =  this.myTasks.findIndex( task => task.id == data);
-      this.myTasks[tc].state = 1;
+      let tc =  this.myTasks.findIndex( task => task._id == data);
+      this.myTasks[tc]._state = 1;
+      this.updateTask(this.myTasks[tc]);
     }else if( e.target.classList.contains("completedTab")){
-      let tc = this.myTasks.findIndex( task => task.id == data);
-      this.myTasks[tc].state = 2;
+      let tc = this.myTasks.findIndex( task => task._id == data);
+      this.myTasks[tc]._state = 2;
+      this.updateTask(this.myTasks[tc]);
+    }
+    else if( e.target.classList.contains("del")){
+      let tc = this.myTasks.findIndex( task => task._id == data);
+      this.deleteTask(this.myTasks[tc]);
+      window.location.reload();
     }
     else{
     }
+
+    this.delete = true;
+  }
+
+  deleteTask(task: any){
+    this.MyTaskService.deleteByID(task._id)
+      .subscribe(myTask => task = myTask);
   }
 
   filterTask(number : any, myTask: any[]): any[] {
-    return myTask.filter(t => t.state == number);
+    return myTask.filter(t => t._state == number);
   }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+     window.location.reload();
+    });
+  }
+}
+
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'dialog-content-example-dialog.html',
+  styleUrls: ['./my-tasks.component.css']
+})
+export class DialogContentExampleDialog {
+
+  constructor(private MyTaskService: DefaultService, private location: Location) {}
+
+  statusId = [
+    {value: 0, viewValue: 'New'},
+    {value: 1, viewValue: 'In Progress'},
+    {value: 2, viewValue: 'Completed'},
+  ];
+
+  myTask: Task = {};
+
+  create : boolean = true
+
+  ngOnInit(): void {}
+
+  hideCreateTask(){
+    this.create = !this.create;
+  }
+
+  createTask(task : any){
+    this.MyTaskService.createTask(task)
+    .subscribe(myTask => {task = myTask;
+      this.hideCreateTask();
+    });
+  }
+
+
 }
